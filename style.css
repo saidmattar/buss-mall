@@ -4,8 +4,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+img {
+  width: 600px;
 
-html, body {
-  height: 100%;
-  background: gray;
 }
