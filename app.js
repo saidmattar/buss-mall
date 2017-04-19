@@ -42,7 +42,7 @@ function getRandomIndex(list){
 }
 
 //creating three elements and assigning them to variables
-var mainDiv = document.getElementById('clickable-images');
+var mainDiv = document.getElementById('clickableImages');
 var firstImage =document.createElement('img');
 var secondImage = document.createElement('img');
 var thirdImage = document.createElement('img');
@@ -113,9 +113,58 @@ function clicked(event){
     secondImage.removeEventListener('click', clicked);
     thirdImage.removeEventListener('click', clicked);
 
+    mainDiv.textContent = '';
+    
+    displayChart();
   }
 }
-
 firstImage.addEventListener('click', clicked);
 secondImage.addEventListener('click', clicked);
 thirdImage.addEventListener('click', clicked);
+
+  //created the chart-canvas
+function displayChart(){
+    //refill photos array with the photo objects we took
+    //during getThreeRandomPhotos
+  photos = photos.concat(photosOnScreen);
+  photos = photos.concat(photosOnPreviousScreen);    photos = photos.concat(photosOnSecondToLastScreen);
+
+    // empty out the app div
+
+  var canvas = document.createElement('canvas');
+  canvas.width = mainDiv.clientWidth;    canvas.height = mainDiv.clientWidth;
+  mainDiv.appendChild(canvas);
+
+  var ctx = canvas.getContext('2d');
+  ctx.fillRect(0, 0, 50, 50);
+
+    // create a data object to make a chart
+  var data = {
+    type: 'bar',
+    labels: [ ],
+    datasets: [
+      {
+        label: 'click count',
+        data: [],
+      },
+      {
+        label: 'display count',
+        data: [],
+      },
+    ],
+  };
+
+  var currentPhoto;
+
+  for(var i=0; i< photos.length; i++){
+    currentPhoto = photos[i];
+    data.labels.push(currentPhoto.name);
+    data.datasets[0].data.push(currentPhoto.clicksCounter);
+    data.datasets[1].data.push(currentPhoto.displayedTimes);
+  }
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: data,
+  });
+}
