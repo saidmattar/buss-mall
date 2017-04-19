@@ -114,7 +114,7 @@ function clicked(event){
     thirdImage.removeEventListener('click', clicked);
 
     mainDiv.textContent = '';
-    
+
     displayChart();
   }
 }
@@ -151,6 +151,10 @@ function displayChart(){
         label: 'display count',
         data: [],
       },
+      {
+        label: 'ratio click count displayc count',
+        data: [],
+      },
     ],
   };
 
@@ -161,6 +165,8 @@ function displayChart(){
     data.labels.push(currentPhoto.name);
     data.datasets[0].data.push(currentPhoto.clicksCounter);
     data.datasets[1].data.push(currentPhoto.displayedTimes);
+    data.datasets[2].data.push(currentPhoto.clicksCounter / currentPhoto.displayedTimes);
+
   }
 
   new Chart(ctx, {
