@@ -1,4 +1,4 @@
-#User Stories(MVP)  
+# User Stories(MVP)  
 As a user, I want a webpage that displays BusMall catalogs that are  placed on Puget Sound regional transit system buses...
 a catalog of assorted high-markup products provided to a captive audience seeking a mental escape from the drudgery of travel.  
 
