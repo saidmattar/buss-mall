@@ -1,11 +1,18 @@
 'use strict';
+//created the photos objects constructors
 function Photo(name, filename){
   this.name = name;
   this.filename = filename;
-  this.clicksCunter =0;
+  this.clicksCounter =0;
   this.displayedTimes = 0;
 }
+//created 4 embty rrays to hold the set of photos
+var photosOnSecondToLastScreen = [];
+var photosOnPreviousScreen = [];
+var photosOnScreen = [];
 var photos = [];
+
+//created the opjects and push them into the photos array
 photos.push( new Photo('taravel bag', 'img/bag.jpg'));
 photos.push( new Photo('banana chopper', 'img/banana.jpg'));
 photos.push( new Photo('bathroom party', 'img/bathroom.jpg'));
@@ -26,257 +33,79 @@ photos.push( new Photo('unicorn meat can','img/unicorn.jpg'));
 photos.push( new Photo('usb container','img/usb.gif'));
 photos.push( new Photo('water container','img/water-can.jpg'));
 photos.push( new Photo('wine glass ','img/wine-glass.jpg'));
+
+//getting a random number to choose a photo object out of the photos array
 function getRandomIndex(list){
-return Math.floor(Math.random() * list.length);
+  return Math.floor(Math.random() * list.length);
+}
+
+//creating three elements and assigning them to variables
+var mainDiv = document.getElementById('clickable-images');
+var firstImage =document.createElement('img');
+var secondImage = document.createElement('img');
+var thirdImage = document.createElement('img');
+
+newSetOfPhotos();
+
+//createt a function to assign the three random photos out of the photos array to the elements by revoking the getThreeRandomPhotos function
+function newSetOfPhotos() {
+  getThreeRandomPhotos();
+  firstImage.src = photosOnScreen[0].filename;
+  photosOnScreen[0].displayedTimes++;
+  secondImage.src = photosOnScreen[1].filename;
+  photosOnScreen[1].displayedTimes++;
+  thirdImage.src = photosOnScreen[2].filename;
+  photosOnScreen[2].displayedTimes++;
+  mainDiv.appendChild(firstImage);
+  mainDiv.appendChild(secondImage);
+  mainDiv.appendChild(thirdImage);
 }
 
 
-
-
-var mainDiv = document.getElementById('clickable-images');
-var firstImage =document.createElement('img');
-mainDiv.appendChild(firstImage);
-firstImage.src =  photos[getRandomIndex(photos)].filename;
-console.log(firstImage);
-var secondImage =document.createElement('img');
-mainDiv.appendChild(secondImage);
-secondImage.src = photos[getRandomIndex(photos)].filename;
-var thirdImage = document.createElement('img');
-mainDiv.appendChild(thirdImage);
-thirdImage.src = photos[getRandomIndex(photos)].filename;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var count = 0;
-// var countClicks= document.getElementById('clicks-first');
-// countClicks.textContent = count;
-//
-// function handleIncButtonClick(){
-//   console.log('clicking!');
-//   count++;
-//   countClicks.textContent = count;
-// }
-// countClicks.addEventListener('click', handleIncButtonClick);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var photoData = [];
-// var clicksCounter = 0;
-// var displayCounter =0;
-// // Photo constructor
-// function Photo(name, filename){
-//   this.name = name;
-//   this.src = './img/' + filename;
-//   this.clickCounter =0;
-//   this.displayCounter =0;
-// }
-// //created an an embty array for photos displayed
-// var photosOnScreen = [];
-//
-// //created an embty array of previous photos
-// var photosOnPreviousScreen = [];
-//
-// //created an embty array of photos before previous photos
-// var photosOnScreenBeforeLast =[];
-//
-// //created an array of photos
-// var photos = [
-//
-//
-// Photos.prototype.creatImage
-//
-// function getRandomIndex(list){
-//   return Math.floor(Math.random() * list.lengh);
-// }
-// //get tree random images
-// function selectThreeRandomPhotos(){
-//   photos = photos.concat(photosOnScreenBeforeLast);
-//
-//   photosOnScreenBeforeLast = photosOnPreviousScreen;
-//   photosOnPreviousScreen = photosOnScreen;
-//   photosOnScreen =[];
-//
-//
-//
-//   var nextPhoto =photos.splice(getRandomIndex(photos), 1);
-//   photosOnScreen = photosOnScreen.concat(nextPhoto);
-//
-//   nextPhoto = photos.splice(getRandomIndex(photos), 1);
-//   photosOnScreen = photosOnScreen.concat(nextPhoto);
-//   return photosOnScreen;
-// }
-//
-// function handleeImageClick(event){
-//   clicksCounter++;
-//   if (clicksCounter<5){
-//     var currentImage = event.target.id;
-//     for (var i = 0; i < photoData.lengh, i){
-//       if
-//     }
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var mainDiv = document.getElementById('clickable-images');
-// var firstImage =document.createElement('img');
-// mainDiv.appendChild(firstImage);
-// firstImage.src = 'img/bag.jpg';
-// console.log(firstImage);
-// var secondImage =document.createElement('img');
-// mainDiv.appendChild(secondImage);
-// secondImage.src ='img/banana.jpg';
-// var thirdImage = document.createElement('img');
-// mainDiv.appendChild(thirdImage);
-// thirdImage.src = 'img/chair.jpg';
+function getThreeRandomPhotos(){
+  photos = photos.concat(photosOnSecondToLastScreen);
+  photosOnSecondToLastScreen = photosOnPreviousScreen;
+  photosOnPreviousScreen = photosOnScreen;
+  photosOnScreen = [];
+
+  // created a var nextPhoto to keep track of the next Photo we take out of photos
+  // splice out an photo object (wich removes it from photos)
+  var nextPhoto = photos.splice(getRandomIndex(photos), 1);
+  // concat the array returned by splice onto photos onScreen
+  photosOnScreen = photosOnScreen.concat(nextPhoto);
+  // repeat two more times to get three images
+  nextPhoto = photos.splice(getRandomIndex(photos), 1);
+  photosOnScreen = photosOnScreen.concat(nextPhoto);
+  nextPhoto = photos.splice(getRandomIndex(photos), 1);
+  photosOnScreen = photosOnScreen.concat(nextPhoto);
+
+  return photosOnScreen;
+}
+
+//created an event handler function that increment the number of time the picture was clicked
+function clicked(event){
+  console.log('hello');
+
+  // assigning the targeted image to a variable
+  var currentImage = event.target;
+
+  //checking to see if the image element on the screen is one of the objects in the photos array
+  if (currentImage.src.includes(photosOnScreen[0].filename)){
+    photosOnScreen[0].clicksCounter++;
+    console.log(photosOnScreen[0].clicksCounter);
+  }
+  if (currentImage.src.includes(photosOnScreen[1].filename)){
+    photosOnScreen[1].clicksCounter++;
+    console.log(photosOnScreen[1].clicksCounter);
+  }
+  if (currentImage.src.includes(photosOnScreen[2].filename)){
+    photosOnScreen[2].clicksCounter++;
+    console.log(photosOnScreen[2].clicksCounter);
+  }
+
+  setTimeout(newSetOfPhotos, 500);
+}
+
+firstImage.addEventListener('click', clicked);
+secondImage.addEventListener('click', clicked);
+thirdImage.addEventListener('click', clicked);
