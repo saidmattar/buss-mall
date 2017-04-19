@@ -6,6 +6,8 @@ function Photo(name, filename){
   this.clicksCounter =0;
   this.displayedTimes = 0;
 }
+
+var totalClicksOnImages = 0;
 //created 4 embty rrays to hold the set of photos
 var photosOnSecondToLastScreen = [];
 var photosOnPreviousScreen = [];
@@ -84,26 +86,34 @@ function getThreeRandomPhotos(){
 
 //created an event handler function that increment the number of time the picture was clicked
 function clicked(event){
-  console.log('hello');
+  totalClicksOnImages++;
+  if ( totalClicksOnImages < 25) {
 
-  // assigning the targeted image to a variable
-  var currentImage = event.target;
+    // assigning the targeted image to a variable
+    var currentImage = event.target;
 
-  //checking to see if the image element on the screen is one of the objects in the photos array
-  if (currentImage.src.includes(photosOnScreen[0].filename)){
-    photosOnScreen[0].clicksCounter++;
-    console.log(photosOnScreen[0].clicksCounter);
-  }
-  if (currentImage.src.includes(photosOnScreen[1].filename)){
-    photosOnScreen[1].clicksCounter++;
-    console.log(photosOnScreen[1].clicksCounter);
-  }
-  if (currentImage.src.includes(photosOnScreen[2].filename)){
-    photosOnScreen[2].clicksCounter++;
-    console.log(photosOnScreen[2].clicksCounter);
-  }
+    //checking to see if the image element on the screen is one of the objects in the photos array
+    if (currentImage.src.includes(photosOnScreen[0].filename)){
+      photosOnScreen[0].clicksCounter++;
+      console.log(photosOnScreen[0].clicksCounter);
+    }
+    if (currentImage.src.includes(photosOnScreen[1].filename)){
+      photosOnScreen[1].clicksCounter++;
+      console.log(photosOnScreen[1].clicksCounter);
+    }
+    if (currentImage.src.includes(photosOnScreen[2].filename)){
+      photosOnScreen[2].clicksCounter++;
+      console.log(photosOnScreen[2].clicksCounter);
+    }
 
-  setTimeout(newSetOfPhotos, 500);
+    setTimeout(newSetOfPhotos, 400);
+  }
+  else{
+    firstImage.removeEventListener('click', clicked);
+    secondImage.removeEventListener('click', clicked);
+    thirdImage.removeEventListener('click', clicked);
+
+  }
 }
 
 firstImage.addEventListener('click', clicked);
