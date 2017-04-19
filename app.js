@@ -87,7 +87,7 @@ function getThreeRandomPhotos(){
 //created an event handler function that increment the number of time the picture was clicked
 function clicked(event){
   totalClicksOnImages++;
-  if ( totalClicksOnImages < 5) {
+  if ( totalClicksOnImages < 25) {
 
     // assigning the targeted image to a variable
     var currentImage = event.target;
@@ -113,6 +113,8 @@ function clicked(event){
     secondImage.removeEventListener('click', clicked);
     thirdImage.removeEventListener('click', clicked);
 
+    mainDiv.textContent = '';
+    
     displayChart();
   }
 }
@@ -128,7 +130,6 @@ function displayChart(){
   photos = photos.concat(photosOnPreviousScreen);    photos = photos.concat(photosOnSecondToLastScreen);
 
     // empty out the app div
-  mainDiv.textContent = '';
 
   var canvas = document.createElement('canvas');
   canvas.width = mainDiv.clientWidth;    canvas.height = mainDiv.clientWidth;
@@ -140,7 +141,7 @@ function displayChart(){
     // create a data object to make a chart
   var data = {
     type: 'bar',
-    labels: [],
+    labels: [ ],
     datasets: [
       {
         label: 'click count',
