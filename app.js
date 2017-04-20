@@ -87,7 +87,7 @@ function getThreeRandomPhotos(){
 //created an event handler function that increment the number of time the picture was clicked
 function clicked(event){
   totalClicksOnImages++;
-  if ( totalClicksOnImages < 25) {
+  if ( totalClicksOnImages < 15) {
 
     // assigning the targeted image to a variable
     var currentImage = event.target;
@@ -106,14 +106,14 @@ function clicked(event){
       console.log(photosOnScreen[2].clicksCounter);
     }
 
-    setTimeout(newSetOfPhotos, 400);
+    newSetOfPhotos();
   }
   else{
     firstImage.removeEventListener('click', clicked);
     secondImage.removeEventListener('click', clicked);
     thirdImage.removeEventListener('click', clicked);
 
-    mainDiv.textContent = '';
+    mainDiv.innerHTML = '';
 
     displayChart();
   }
@@ -132,7 +132,7 @@ function displayChart(){
     // empty out the app div
 
   var canvas = document.createElement('canvas');
-  canvas.width = mainDiv.clientWidth;    canvas.height = mainDiv.clientWidth;
+  canvas.width = mainDiv.clientWidth;    canvas.height = '900';
   mainDiv.appendChild(canvas);
 
   var ctx = canvas.getContext('2d');
@@ -146,14 +146,17 @@ function displayChart(){
       {
         label: 'click count',
         data: [],
+        backgroundColor: 'red',
       },
       {
         label: 'display count',
         data: [],
+        backgroundColor: 'blue',
       },
       {
-        label: 'ratio click count displayc count',
+        label: 'Cicked to Displayed ratio',
         data: [],
+        backgroundColor: 'gray',
       },
     ],
   };
