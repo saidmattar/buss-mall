@@ -90,7 +90,7 @@ function getThreeRandomPhotos(){
 //created an event handler function that increment the number of time the picture was clicked
 function clicked(event){
   totalClicksOnImages++;
-  if ( totalClicksOnImages < 15) {
+  if ( totalClicksOnImages < 25) {
 
     // assigning the targeted image to a variable
     var currentImage = event.target;
