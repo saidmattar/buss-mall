@@ -15,27 +15,30 @@ var photosOnScreen = [];
 var photos = [];
 
 //created the opjects and push them into the photos array
-photos.push( new Photo('taravel bag', 'img/bag.jpg'));
-photos.push( new Photo('banana chopper', 'img/banana.jpg'));
-photos.push( new Photo('bathroom party', 'img/bathroom.jpg'));
-photos.push( new Photo('rain boots', 'img/boots.jpg'));
-photos.push( new Photo('breakfast machine','img/breakfast.jpg'));
-photos.push( new Photo('meat ball bubblegum','img/bubblegum.jpg'));
-photos.push( new Photo('blastic chair','img/chair.jpg'));
-photos.push( new Photo('cthulhu','img/cthulhu.jpg'));
-photos.push( new Photo('dog nose','img/dog-duck.jpg'));
-photos.push( new Photo('dragon meat','img/dragon.jpg'));
-photos.push( new Photo('pen caps','img/pen.jpg'));
-photos.push( new Photo('pet sweep','img/pet-sweep.jpg'));
-photos.push( new Photo('scissors holder','img/scissors.jpg'));
-photos.push( new Photo('shark sleeping bag','img/shark.jpg'));
-photos.push( new Photo('sweep mat','img/sweep.png'));
-photos.push( new Photo('tautaun blanket','img/tauntaun.jpg'));
-photos.push( new Photo('unicorn meat can','img/unicorn.jpg'));
-photos.push( new Photo('usb container','img/usb.gif'));
-photos.push( new Photo('water container','img/water-can.jpg'));
-photos.push( new Photo('wine glass ','img/wine-glass.jpg'));
-
+try{
+  photos = JSON.parse(localStorage.photos);
+} catch(error){
+  photos.push( new Photo('taravel bag', 'img/bag.jpg'));
+  photos.push( new Photo('banana chopper', 'img/banana.jpg'));
+  photos.push( new Photo('bathroom party', 'img/bathroom.jpg'));
+  photos.push( new Photo('rain boots', 'img/boots.jpg'));
+  photos.push( new Photo('breakfast machine','img/breakfast.jpg'));
+  photos.push( new Photo('meat ball bubblegum','img/bubblegum.jpg'));
+  photos.push( new Photo('blastic chair','img/chair.jpg'));
+  photos.push( new Photo('cthulhu','img/cthulhu.jpg'));
+  photos.push( new Photo('dog nose','img/dog-duck.jpg'));
+  photos.push( new Photo('dragon meat','img/dragon.jpg'));
+  photos.push( new Photo('pen caps','img/pen.jpg'));
+  photos.push( new Photo('pet sweep','img/pet-sweep.jpg'));
+  photos.push( new Photo('scissors holder','img/scissors.jpg'));
+  photos.push( new Photo('shark sleeping bag','img/shark.jpg'));
+  photos.push( new Photo('sweep mat','img/sweep.png'));
+  photos.push( new Photo('tautaun blanket','img/tauntaun.jpg'));
+  photos.push( new Photo('unicorn meat can','img/unicorn.jpg'));
+  photos.push( new Photo('usb container','img/usb.gif'));
+  photos.push( new Photo('water container','img/water-can.jpg'));
+  photos.push( new Photo('wine glass ','img/wine-glass.jpg'));
+}
 //getting a random number to choose a photo object out of the photos array
 function getRandomIndex(list){
   return Math.floor(Math.random() * list.length);
@@ -116,7 +119,14 @@ function clicked(event){
     mainDiv.innerHTML = '';
 
     displayChart();
+
+    try{
+      localStorage.photos =JSON.stringify(photos);
+    }catch(error){
+      console.log(error);
+    }
   }
+
 }
 firstImage.addEventListener('click', clicked);
 secondImage.addEventListener('click', clicked);
