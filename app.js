@@ -165,17 +165,17 @@ function displayChart(){
       {
         label: 'click count',
         data: [],
-        backgroundColor: 'red',
+        backgroundColor: '#CE1512',
       },
       {
         label: 'display count',
         data: [],
-        backgroundColor: 'blue',
+        backgroundColor: '#0B3B49',
       },
       {
         label: 'Cicked to Displayed ratio',
         data: [],
-        backgroundColor: 'gray',
+        backgroundColor: 'white',
       },
     ],
   };
