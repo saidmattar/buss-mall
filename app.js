@@ -46,9 +46,12 @@ function getRandomIndex(list){
 
 //creating three elements and assigning them to variables
 var mainDiv = document.getElementById('clickableImages');
-var firstImage =document.createElement('img');
-var secondImage = document.createElement('img');
-var thirdImage = document.createElement('img');
+var firstImage =document.getElementById('firstPic');
+var firstImageTitle =document.getElementById('firstPicTitle');
+var secondImage = document.getElementById('secondPic');
+var secondImageTitle = document.getElementById('secondPicTitle');
+var thirdImage = document.getElementById('thirdPic');
+var thirdImageTitle =document.getElementById('thirdPicTitle');
 
 newSetOfPhotos();
 
@@ -56,14 +59,20 @@ newSetOfPhotos();
 function newSetOfPhotos() {
   getThreeRandomPhotos();
   firstImage.src = photosOnScreen[0].filename;
+  firstImage.alt = photosOnScreen[0].name;
+  firstImageTitle.textContent = photosOnScreen[0].name;
   photosOnScreen[0].displayedTimes++;
   secondImage.src = photosOnScreen[1].filename;
+  secondImage.alt = photosOnScreen[1].name;
+  secondImageTitle.textContent = photosOnScreen[1].name;
   photosOnScreen[1].displayedTimes++;
   thirdImage.src = photosOnScreen[2].filename;
+  thirdImage.alt = photosOnScreen[2].name;
+  thirdImageTitle.textContent =photosOnScreen[2].name;
   photosOnScreen[2].displayedTimes++;
-  mainDiv.appendChild(firstImage);
-  mainDiv.appendChild(secondImage);
-  mainDiv.appendChild(thirdImage);
+  // mainDiv.appendChild(firstImage);
+  //mainDiv.appendChild(secondImage);
+  //mainDiv.appendChild(thirdImage);
 }
 
 
