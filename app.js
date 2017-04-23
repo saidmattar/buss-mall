@@ -7,7 +7,7 @@ function Photo(name, filename){
   this.displayedTimes = 0;
 }
 
-var totalClicksOnImages = 0;
+var totalClicksOnImages = 25;
 //created 4 embty rrays to hold the set of photos
 var photosOnSecondToLastScreen = [];
 var photosOnPreviousScreen = [];
@@ -98,8 +98,8 @@ function getThreeRandomPhotos(){
 
 //created an event handler function that increment the number of time the picture was clicked
 function clicked(event){
-  totalClicksOnImages++;
-  if ( totalClicksOnImages < 25) {
+  totalClicksOnImages--;
+  if ( totalClicksOnImages >= 0) {
 
     // assigning the targeted image to a variable
     var currentImage = event.target;
@@ -127,6 +127,9 @@ function clicked(event){
 
     mainDiv.innerHTML = '';
 
+    var thanks = document.getElementById('headerParagraph');
+    thanks.textContent = 'Thank you for shopping our bus!';
+
     displayChart();
 
     try{
@@ -146,12 +149,13 @@ function displayChart(){
     //refill photos array with the photo objects we took
     //during getThreeRandomPhotos
   photos = photos.concat(photosOnScreen);
-  photos = photos.concat(photosOnPreviousScreen);    photos = photos.concat(photosOnSecondToLastScreen);
+  photos = photos.concat(photosOnPreviousScreen);
+  photos = photos.concat(photosOnSecondToLastScreen);
 
     // empty out the app div
 
   var canvas = document.createElement('canvas');
-  canvas.width = mainDiv.clientWidth;    canvas.height = '900';
+  canvas.width = mainDiv.clientWidth;    canvas.height = '430';
   mainDiv.appendChild(canvas);
 
   var ctx = canvas.getContext('2d');
@@ -190,7 +194,7 @@ function displayChart(){
     data.datasets[2].data.push(currentPhoto.clicksCounter / currentPhoto.displayedTimes);
 
   }
-
+  Chart.defaults.global.defaultFontColor = '#D3E8E6';
   new Chart(ctx, {
     type: 'bar',
     data: data,

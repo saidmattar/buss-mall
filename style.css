@@ -9,6 +9,7 @@
 html, body {
   height: 100%;
   background: #3D526D;
+  color: #D3E8E6;
   }
 
 
@@ -30,9 +31,7 @@ html, body {
      transition-duration: 1s,2s;
      transition-timing-function: linear, ease-in;
      transition-delay: 0s, 2s;
-
      color: #424B56;
-
 }
 
 #clickableImages img:hover {
@@ -52,8 +51,8 @@ header
   height: 250px;
   margin: 0 auto;
   margin-top: 10px;
-  color: #D3E8E6;
-}
+  }
+
 header img {
   height: 200px;
   padding-bottom: 20px;
@@ -61,6 +60,7 @@ header img {
 
 #clickableImages {
   background-color: gray;
+  height: 300;
   width: 80%;
   margin: 0 auto;
   margin-top: 30px;
@@ -69,4 +69,8 @@ header img {
 }
 #logoHeader {
   font-family: 'Indie Flower', cursive;
+}
+
+#headerParagraph {
+  font-family: 'Courgette', cursive;
 }
